@@ -1,4 +1,5 @@
-var GAME = {};   // Create a placeholder for our new State module
+// This module/state handles the primary navigation on the main screen
+var GAME = {};
 
 (function() {
     var log  = function(str) { console.log(this.id + ': ' + str);}.bind(this);
