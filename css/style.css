@@ -29,12 +29,11 @@ body {
 
 #playfieldContainer {
     position: relative;
-    aspect-ratio: 1280/720;
+    aspect-ratio: 1280/800;
     height: 100%;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
-    /* cursor: none; */
 }
 
 #playfieldContainer > #playfield {
