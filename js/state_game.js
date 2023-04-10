@@ -23,24 +23,7 @@ var GAME = {};   // Create a placeholder for our new State module
         log('Entering ' + this.id);
 
         if (!INITED) {
-            log('Initializing ' + this.id);
-            INITED = true;
-
-            tileMapCanvas = document.createElement("canvas");
-            tileMapCanvas.width = 642;
-            tileMapCanvas.height = 386;
-
-            mapCanvas = document.createElement("canvas");
-            mapCanvas.width = 524;
-            mapCanvas.height = 329;
-
-            panelCanvas = document.createElement("canvas");
-            panelCanvas.width = 644;
-            panelCanvas.height = 329;
-
-            environmentCanvas = document.createElement("canvas");
-            environmentCanvas.width = 540;
-            environmentCanvas.height = 424;
+            this.init();
         }
 
         g.state = s.RUNNING;
@@ -57,6 +40,28 @@ var GAME = {};   // Create a placeholder for our new State module
     this.eventHandler = function (event) {
         return false;
     }.bind(this);
+
+    // ********************************************
+    this.init = function() {
+        log('Initializing ' + this.id);
+        INITED = true;
+
+        tileMapCanvas = document.createElement("canvas");
+        tileMapCanvas.width = 642;
+        tileMapCanvas.height = 386;
+
+        mapCanvas = document.createElement("canvas");
+        mapCanvas.width = 524;
+        mapCanvas.height = 329;
+
+        panelCanvas = document.createElement("canvas");
+        panelCanvas.width = 644;
+        panelCanvas.height = 329;
+
+        environmentCanvas = document.createElement("canvas");
+        environmentCanvas.width = 540;
+        environmentCanvas.height = 424;
+    };
 
     // ********************************************
     this.redraw = function() {
@@ -105,8 +110,7 @@ var GAME = {};   // Create a placeholder for our new State module
     // ********************************************
     drawEnvironment = function() {
          var ctx = environmentCanvas.getContext("2d");
-       // Draw environment image
-//            g.ctx.drawImage(g.beachImg, 0, 0, 1024, 720, 720, 30, 500, 384);
+        // Draw environment image
         ctx.drawImage(g.beachImg, 0, 0, 1024, 725, 40, 35, 450, 330);
         ctx.drawImage(g.frameImg, 0, 0, 476, 352, 0, 0, 540, 424);
 
