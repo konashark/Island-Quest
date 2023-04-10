@@ -67,7 +67,7 @@ window.onload = function() {
 
 /*************************************************/
 function loadResources(callback) {
-    var numToLoad = 10;
+    var numToLoad = 11;
     var frame, i;
 
     var isLoadComplete = function() {
@@ -88,6 +88,7 @@ function loadResources(callback) {
     g.woodImg = jgl.newImage('resources/images/wood.png', isLoadComplete);
     g.frameImg = jgl.newImage('resources/images/frame.png', isLoadComplete);
     g.deskImg = jgl.newImage('resources/images/desktop.jpg', isLoadComplete);
+    g.titleImg = jgl.newImage('resources/images/islandquest.png', isLoadComplete);
 
     // Tiles
     g.beachTile = jgl.newImage('resources/images/tiles/beach-128.jpg', isLoadComplete);

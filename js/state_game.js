@@ -71,8 +71,8 @@ var GAME = {};
         mapCanvas.height = 320;
 
         panelCanvas = document.createElement("canvas");
-        panelCanvas.width = 644;
-        panelCanvas.height = 329;
+        panelCanvas.width = 524;
+        panelCanvas.height = 305;
 
         environmentCanvas = document.createElement("canvas");
         environmentCanvas.width = 540;
@@ -90,6 +90,9 @@ var GAME = {};
             drawEnvironment();
             drawTileMap(); 
             drawPanel();
+
+            // Draw title
+            g.ctx.drawImage(g.titleImg, 0, 0, 640, 100, 14, 0, 640, 100);
             drawMap();
         }
 
@@ -118,9 +121,9 @@ var GAME = {};
         tileMapCtx.strokeStyle = "#fc8";
         tileMapCtx.strokeStyle = 'rgba(255,225,176,0.5)';
         tileMapCtx.lineWidth = 2;
-        tileMapCtx.strokeRect(0, 0, 128*5 + 2, 128*3 + 2);
+        tileMapCtx.strokeRect(0, 0, 128*5 + 2, 128*5 + 2);
 
-        g.ctx.drawImage(tileMapCanvas, 38, 26, 128*5 + 2, 128*5 + 2);
+        g.ctx.drawImage(tileMapCanvas, 42, 110, 128*5 + 2, 128*5 + 2);
 };
 
     // ********************************************
@@ -142,6 +145,7 @@ var GAME = {};
         var ctx = mapCanvas.getContext("2d");
         ctx.drawImage(g.mapImg, 0, 0);
 
+        // Draw crosshairs
         ctx.strokeStyle = "#C20";
         ctx.lineWidth = 3;
         ctx.beginPath();
@@ -161,6 +165,7 @@ var GAME = {};
         ctx.lineTo(g.xTile + 10, g.yTile);
         ctx.stroke();
 
+        // Draw frame
         ctx.lineWidth = 2;
         ctx.strokeStyle = "#fc8";
         ctx.strokeStyle = 'rgba(255,225,176,0.5)';
@@ -173,12 +178,12 @@ var GAME = {};
     drawPanel = function() {
         var ctx = panelCanvas.getContext("2d");
         // Panel
-        ctx.drawImage(g.deskImg, 0, 0, 640, 325, 2, 2, 640, 325);
+        ctx.drawImage(g.deskImg, 0, 0);
         ctx.strokeStyle = 'rgba(255,225,176,0.5)';
         ctx.lineWidth = 2;
-        ctx.strokeRect(0, 0, 644, 329);
+        ctx.strokeRect(0, 0, 524, 305);
 
-        g.ctx.drawImage(panelCanvas, 718, 448, 524, 329);
+        g.ctx.drawImage(panelCanvas, 718, 448);
     };
 
 }).apply(GAME);  // Apply this object to the State placeholder we defined
