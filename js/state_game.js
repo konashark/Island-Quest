@@ -20,6 +20,8 @@ var GAME = {};
     var panelCanvas = undefined;
     var environmentCanvas = undefined;
 
+    var terrainIndex = 1;
+
    // ********************************************
     this.enter = function (currentState, userData) {
         log('Entering ' + this.id);
@@ -44,11 +46,39 @@ var GAME = {};
         var key = event.key;
         var keyCode = event.keyCode;
                 
-        console.log("Event: " + keyCode);
+        //console.log("Event: " + keyCode);
 
         switch (keyCode) {
             case jgl.KEYS.M: {
                 MAP_ACTIVE = !MAP_ACTIVE;
+                consumed = true;
+                this.redraw();
+            }
+            break;
+
+            case jgl.KEYS.RIGHT: {
+                scrollMap(2,0,64);
+                consumed = true;
+                this.redraw();
+            }
+            break;
+
+            case jgl.KEYS.LEFT: {
+                scrollMap(-2,0,64);
+                consumed = true;
+                this.redraw();
+            }
+            break;
+
+            case jgl.KEYS.UP: {
+                scrollMap(0,-2,64);
+                consumed = true;
+                this.redraw();
+            }
+            break;
+
+            case jgl.KEYS.DOWN: {
+                scrollMap(0,2,64);
                 consumed = true;
                 this.redraw();
             }
@@ -95,28 +125,40 @@ var GAME = {};
             g.ctx.drawImage(g.titleImg, 0, 0, 640, 100, 14, 0, 640, 100);
             drawMap();
         }
-
     };
+
+    //***********************************************
+    function scrollMap(xd, yd, frames) {
+        var numFrames = frames;
+        function animLoop(){
+            if (frames > 0){
+                frames--;
+                g.y += yd;
+                g.x += xd;
+                drawTileMap();
+                if (frames == parseInt(numFrames / 2)) {
+                    drawEnvironment();
+                }
+                requestAnimFrame(animLoop);
+            } else {
+                //exposeMap();
+            }
+        }
+        animLoop();
+    }
 
     // ********************************************
     drawTileMap = function() {
         var tileMapCtx = tileMapCanvas.getContext("2d");
 
-        // Tile Map
-        var pixels = g.islandMapCtx.getImageData(g.xTile - 2, g.yTile - 1, 5, 3);
-        console.log("Pixels: ");
-        for (var i = 0; i < 60; i+=4) {
-            console.log(i+": "+jgl.decToHex(pixels.data[i])+jgl.decToHex(pixels.data[i+1])+jgl.decToHex(pixels.data[i+2]) );
-        }
+        g.map.tileMap.context = tileMapCtx;
+        //console.log("MAP AT "+g.x+","+g.y);
+        g.map.drawMap(g.x, g.y);
 
-        for (y = 0; y < 5; y++) {
-            for (x = 0; x < 5; x++) {
-                if (Math.random() > .5)
-                    tileMapCtx.drawImage(g.beachTile, 0, 0, 128, 128, 2 + (x * 128), 2 + (y * 128), 126, 126);
-                else
-                    tileMapCtx.drawImage(g.forestTile, 0, 0, 128, 128, 2 + (x * 128), 2 + (y * 128), 126, 126);
-            }
-        }
+        tileMapCtx.fillStyle = "#DD8800";
+        tileMapCtx.fillRect(256 + 54, 256 + 54, 20, 20);
+        tileMapCtx.strokeStyle = "#FFFFFF";
+        tileMapCtx.strokeRect(256 + 54, 256 + 54, 20, 20);
 
         tileMapCtx.strokeStyle = "#fc8";
         tileMapCtx.strokeStyle = 'rgba(255,225,176,0.5)';
@@ -124,13 +166,20 @@ var GAME = {};
         tileMapCtx.strokeRect(0, 0, 128*5 + 2, 128*5 + 2);
 
         g.ctx.drawImage(tileMapCanvas, 42, 110, 128*5 + 2, 128*5 + 2);
-};
+    };
 
     // ********************************************
     drawEnvironment = function() {
          var ctx = environmentCanvas.getContext("2d");
-        // Draw environment image
-        ctx.drawImage(g.beachImg, 0, 0, 1024, 725, 40, 35, 450, 330);
+
+        var tileIndex = g.map.tileAt(g.x, g.y);
+        console.log("TILE: "+tileIndex);
+        console.log("TERRAIN: "+g.terrain[tileIndex].type);
+        if (tileIndex >= 0) {
+            // Draw environment image
+            ctx.drawImage(g.terrain[tileIndex].img, 0, 0, 1024, 725, 40, 35, 450, 330);
+        }
+
         ctx.drawImage(g.frameImg, 0, 0, 476, 352, 0, 0, 540, 424);
 
         g.ctx.drawImage(environmentCanvas, 714, 10, 540, 424);
@@ -185,5 +234,4 @@ var GAME = {};
 
         g.ctx.drawImage(panelCanvas, 718, 448);
     };
-
 }).apply(GAME);  // Apply this object to the State placeholder we defined

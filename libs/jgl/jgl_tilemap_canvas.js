@@ -157,8 +157,8 @@ Jgl_TileMapCanvas.prototype.drawMap = function(xoff, yoff, forceRefresh) {
 //*****************************************************
 Jgl_TileMapCanvas.prototype.tileAt = function(x, y) {
     var tile = -1;
-    if (x >= 0 && x < this.tileMap.dispWidthPx && y >= 0 && y < this.tileMap.dispHeightPx){
-        tile = this.mapData.mapData[parseInt(x/64)][parseInt(y/64)];
+    if (x >= 0 && x < this.mapData.mapWidthPx && y >= 0 && y < this.mapData.mapHeightPx){
+        tile = this.mapData.mapData[parseInt(y / this.mapData.tileHeight)][parseInt(x / this.mapData.tileWidth)];
     }
     return tile;
 }

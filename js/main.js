@@ -59,6 +59,7 @@ window.onload = function() {
     // Once external files are loaded, we can start the main game loop by transitioning to first screen state
     this.loadResources(function() {
         console.log('RESOURCES Loaded');
+        createMap();
         stateManager.transitionTo(stateList[stateIdx]);
     });
 
@@ -67,10 +68,11 @@ window.onload = function() {
 
 /*************************************************/
 function loadResources(callback) {
-    var numToLoad = 11;
+    var numToLoad = 27;
     var frame, i;
 
     var isLoadComplete = function() {
+        console.log("Images to load: " + numToLoad);
         if (--numToLoad == 0) {
             callback();
         }
@@ -93,8 +95,25 @@ function loadResources(callback) {
     // Tiles
     g.beachTile = jgl.newImage('resources/images/tiles/beach-128.jpg', isLoadComplete);
     g.forestTile = jgl.newImage('resources/images/tiles/forest 2-128.jpg', isLoadComplete);
+    g.desertTile = jgl.newImage('resources/images/tiles/desert-128.jpg', isLoadComplete);
+    g.meadowTile = jgl.newImage('resources/images/tiles/meadow-128.jpg', isLoadComplete);
+    g.seaTile = jgl.newImage('resources/images/tiles/sea-128.jpg', isLoadComplete);
+    g.swampTile = jgl.newImage('resources/images/tiles/swamp-128.jpg', isLoadComplete);
+    g.mountainTile = jgl.newImage('resources/images/tiles/mountain pass-128.jpg', isLoadComplete);
+    g.snowTile = jgl.newImage('resources/images/tiles/snowy mountain pass-128.jpg', isLoadComplete);
+    g.riverTile = jgl.newImage('resources/images/tiles/river 2-128.jpg', isLoadComplete);
+    g.lakeTile = jgl.newImage('resources/images/tiles/sea-128.jpg', isLoadComplete);
+
 
     // Environments
-    g.beachImg = jgl.newImage('resources/images/terrain/beach on right.jpg', isLoadComplete);
-    g.forestImg = jgl.newImage('resources/images/terrain/forest.jpg', isLoadComplete);
+    g.terrain[0].img = jgl.newImage('resources/images/terrain/beach on right.jpg', isLoadComplete);  // TODO: Need SEA image
+    g.terrain[1].img= jgl.newImage('resources/images/terrain/meadow.jpg', isLoadComplete);
+    g.terrain[2].img= jgl.newImage('resources/images/terrain/forest.jpg', isLoadComplete);
+    g.terrain[3].img= jgl.newImage('resources/images/terrain/swamp.jpg', isLoadComplete);
+    g.terrain[4].img= jgl.newImage('resources/images/terrain/mountain pass.jpg', isLoadComplete);
+    g.terrain[5].img= jgl.newImage('resources/images/terrain/beach on right.jpg', isLoadComplete);
+    g.terrain[6].img= jgl.newImage('resources/images/terrain/desert.jpg', isLoadComplete);
+    g.terrain[7].img= jgl.newImage('resources/images/terrain/river.jpg', isLoadComplete);
+    g.terrain[8].img= jgl.newImage('resources/images/terrain/river.jpg', isLoadComplete);   // TODO: Need LAKE image
+    g.terrain[9].img= jgl.newImage('resources/images/terrain/snowy pass.jpg', isLoadComplete);
 }
