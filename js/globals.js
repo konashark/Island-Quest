@@ -8,10 +8,10 @@ var s = {	// STATICS
 }; // Statics
 
 var g = {	// GLOBALS
-	xTile: 140,
-	yTile: 156,
-    x: 140 * 128 + 64,
-    y: 156 * 128 + 64,
+	xTile: 147,
+	yTile: 164,
+    x: 147 * 128 + 64,
+    y: 164 * 128 + 64,
     canvas: undefined,
     ctx: undefined,
     islandMapImg: undefined,
@@ -51,16 +51,18 @@ var g = {	// GLOBALS
     quarterHour: 0
 };
 
-g.terrain[0]  = { type: 'sea',       img: undefined };
-g.terrain[1]  = { type: 'meadow',    img: undefined };
-g.terrain[2]  = { type: 'forest',    img: undefined };
-g.terrain[3]  = { type: 'swamp',     img: undefined };
-g.terrain[4]  = { type: 'mountain',  img: undefined };
-g.terrain[5]  = { type: 'beach',  img: undefined };
-g.terrain[6]  = { type: 'desert',  img: undefined };
-g.terrain[7]  = { type: 'river',  img: undefined };
-g.terrain[8]  = { type: 'lake',  img: undefined };
-g.terrain[9]  = { type: 'snowy pass',  img: undefined };
+g.terrain[0]  = { type: 'sea',       	img: undefined };
+g.terrain[1]  = { type: 'meadow',    	img: undefined };
+g.terrain[2]  = { type: 'forest',    	img: undefined };
+g.terrain[3]  = { type: 'swamp',     	img: undefined };
+g.terrain[4]  = { type: 'mountain',  	img: undefined };
+g.terrain[5]  = { type: 'beach',  		img: undefined };
+g.terrain[6]  = { type: 'desert',  		img: undefined };
+g.terrain[7]  = { type: 'river',  		img: undefined };
+g.terrain[8]  = { type: 'lake',  		img: undefined };
+g.terrain[9]  = { type: 'snowy pass',	img: undefined };
+g.terrain[10]  = { type: 'town',        img: undefined };
+g.terrain[11]  = { type: 'coastal town',img: undefined };
 
 g.terrain['CAVE']       = { type:' cave',      img: undefined };
 g.terrain['ROCK']       = { type:' rock',      img: undefined };

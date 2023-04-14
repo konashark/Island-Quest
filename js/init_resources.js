@@ -1,3 +1,59 @@
+/*************************************************/
+function loadResources(callback) {
+    var numToLoad = 31;
+    var frame, i;
+
+    var isLoadComplete = function() {
+        console.log("Images to load: " + numToLoad);
+        if (--numToLoad == 0) {
+            callback();
+        }
+    };
+
+    // Load all the images we will make screens or sprites out of
+    g.parchmentImg  = jgl.newImage('resources/images/parchment.png', isLoadComplete);
+    g.mapImg        = jgl.newImage('resources/images/map.png', isLoadComplete);
+    g.islandMapImg  = jgl.newImage('resources/images/islandmap.png', function(img) {
+        g.islandMapCanvas = jgl.convertImageToCanvas(img);
+        g.islandMapCtx    = g.islandMapCanvas.getContext("2d");
+        isLoadComplete();
+    });
+
+    g.woodImg   = jgl.newImage('resources/images/wood.png', isLoadComplete);
+    g.frameImg  = jgl.newImage('resources/images/frame.png', isLoadComplete);
+    g.deskImg   = jgl.newImage('resources/images/desktop.jpg', isLoadComplete);
+    g.titleImg  = jgl.newImage('resources/images/islandquest.png', isLoadComplete);
+
+    // Tiles
+    g.seaTile    = jgl.newImage('resources/images/tiles/sea-128.jpg', isLoadComplete);
+    g.meadowTile = jgl.newImage('resources/images/tiles/meadow-128.jpg', isLoadComplete);
+    g.forestTile = jgl.newImage('resources/images/tiles/forest 2-128.jpg', isLoadComplete);
+    g.swampTile  = jgl.newImage('resources/images/tiles/swamp-128.jpg', isLoadComplete);
+    g.mountainTile = jgl.newImage('resources/images/tiles/mountain pass-128.jpg', isLoadComplete);
+    g.beachTile  = jgl.newImage('resources/images/tiles/beach-128.jpg', isLoadComplete);
+    g.desertTile = jgl.newImage('resources/images/tiles/desert-128.jpg', isLoadComplete);
+    g.riverTile  = jgl.newImage('resources/images/tiles/river 2-128.jpg', isLoadComplete);
+    g.lakeTile   = jgl.newImage('resources/images/tiles/sea-128.jpg', isLoadComplete);
+    g.snowTile   = jgl.newImage('resources/images/tiles/snowy mountain pass-128.jpg', isLoadComplete);
+    g.townTile   = jgl.newImage('resources/images/tiles/town-128.jpg', isLoadComplete);
+    g.coastalTownTile = jgl.newImage('resources/images/tiles/coastal town-128.jpg', isLoadComplete);
+
+
+    // Environments
+    g.terrain[0].img = jgl.newImage('resources/images/terrain/sea.jpg', isLoadComplete);
+    g.terrain[1].img = jgl.newImage('resources/images/terrain/meadow.jpg', isLoadComplete);
+    g.terrain[2].img = jgl.newImage('resources/images/terrain/forest.jpg', isLoadComplete);
+    g.terrain[3].img = jgl.newImage('resources/images/terrain/swamp.jpg', isLoadComplete);
+    g.terrain[4].img = jgl.newImage('resources/images/terrain/mountain pass.jpg', isLoadComplete);
+    g.terrain[5].img = jgl.newImage('resources/images/terrain/beach on right.jpg', isLoadComplete);
+    g.terrain[6].img = jgl.newImage('resources/images/terrain/desert.jpg', isLoadComplete);
+    g.terrain[7].img = jgl.newImage('resources/images/terrain/river.jpg', isLoadComplete);
+    g.terrain[8].img = jgl.newImage('resources/images/terrain/river.jpg', isLoadComplete);   // TODO: Need LAKE image
+    g.terrain[9].img = jgl.newImage('resources/images/terrain/snowy pass.jpg', isLoadComplete);
+    g.terrain[10].img = jgl.newImage('resources/images/terrain/town.jpg', isLoadComplete);
+    g.terrain[11].img = jgl.newImage('resources/images/terrain/coastal town.jpg', isLoadComplete);
+}
+
 //*********************************************************
 function getPixelRgb(pixelData, x) {
     var red = ("00" + pixelData[x*4 + 0].toString(16)).slice(-2);
@@ -35,6 +91,8 @@ function createMap(){
     g.map.newTile({ index:7, img: g.riverTile, x:0, y:0, w:128, h:128 });
     g.map.newTile({ index:8, img: g.lakeTile, x:0, y:0, w:128, h:128 });
     g.map.newTile({ index:9, img: g.snowTile, x:0, y:0, w:128, h:128 });
+    g.map.newTile({ index:10, img: g.townTile, x:0, y:0, w:128, h:128 });
+    g.map.newTile({ index:11, img: g.coastalTownTile, x:0, y:0, w:128, h:128 });
 
     // Generate map
 
@@ -95,6 +153,10 @@ function createMap(){
         }
         mapData.push(rowData);
     }
+
+    // Place any extra objects that arem't in the physical map data
+    // Add harbor town
+    mapData[164][146] = 11;
 
     g.map.attachMap({ numColumns: 500, numRows: 320, tileWidth: 128, tileHeight: 128, mapData: mapData });
 //     g.map.setPositionOffset(224-32, 160-32); // center of map is positioning hot spot

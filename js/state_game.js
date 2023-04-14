@@ -136,12 +136,10 @@ var GAME = {};
                 g.y += yd;
                 g.x += xd;
                 drawTileMap();
-                if (frames == parseInt(numFrames / 2)) {
-                    drawEnvironment();
-                }
                 requestAnimFrame(animLoop);
             } else {
                 //exposeMap();
+                drawEnvironment();
             }
         }
         animLoop();

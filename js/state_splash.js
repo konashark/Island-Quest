@@ -32,16 +32,16 @@ var SPLASH = {};   // Create a placeholder for our new State module
 
         console.log("ID: "+this.id);
 
-        gCtx.fillStyle = "#0C0C1C";
-        gCtx.fillRect(0, 0, g.PLAYFIELD_WIDTH, g.PLAYFIELD_HEIGHT);
+        g.ctx.fillStyle = "#0C0C1C";
+        g.ctx.fillRect(0, 0, s.PLAYFIELD_WIDTH, s.PLAYFIELD_HEIGHT);
 
-        gCtx.strokeStyle = "#239";
-        gCtx.lineWidth = 3;
-        gCtx.strokeRect(0, 0, g.PLAYFIELD_WIDTH, g.PLAYFIELD_HEIGHT);
+        g.ctx.strokeStyle = "#239";
+        g.ctx.lineWidth = 3;
+        g.ctx.strokeRect(0, 0, s.PLAYFIELD_WIDTH, s.PLAYFIELD_HEIGHT);
 
-        gCtx.font = "bold 48px sans-serif";
-        gCtx.fillStyle = "#fff";
-        gCtx.fillText(this.id, (g.PLAYFIELD_WIDTH / 2) - (gCtx.measureText(this.id).width / 2), 80);
+        g.ctx.font = "bold 48px sans-serif";
+        g.ctx.fillStyle = "#fff";
+        g.ctx.fillText(this.id, (s.PLAYFIELD_WIDTH / 2) - (g.ctx.measureText(this.id).width / 2), 80);
     };
 
 }).apply(SPLASH);  // Apply this object to the State placeholder we defined
